@@ -45,6 +45,13 @@ public class XpathSelectors {
         System.out.println(inputCurAdd.getTagName());
         WebElement curAdd = driver.findElement(By.xpath("//*[text()='Current Address']/../..//textarea"));
         curAdd.sendKeys("street Monkey 5");
+        WebElement perAdd = driver.findElement(By.xpath("//div[@id='permanentAddress-wrapper']//textarea"));
+        perAdd.sendKeys("Monkey street 6");
+        WebElement btnSubmit = driver.findElement(By.xpath("//button[text()='Submit']"));
+        btnSubmit.click();
+        WebElement output = driver.findElement(By.xpath("//div[@id='output']"));
+        System.out.println(output.getText());
+
 
 
 
