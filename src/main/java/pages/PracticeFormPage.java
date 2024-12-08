@@ -34,10 +34,14 @@ public class PracticeFormPage extends BasePage {
     WebElement fieldSubjects;
     @FindBy(xpath = "//textarea[@id='currentAddress']")
     WebElement fieldAddress;
-    @FindBy(xpath = "//div[text()='Select State']")
-    WebElement btnState;
-    @FindBy(xpath = "//div[text()='Select City']")
-    WebElement btnCity;
+    @FindBy(xpath = "//input[@id='react-select-3-input']")
+    WebElement inputState;
+    @FindBy(id="react-select-4-input")
+    WebElement inputCity;
+    @FindBy(xpath = "//button[@id='submit']")
+    WebElement btnSubmit;
+    @FindBy(xpath = "//div[text()='Thanks for submitting the form']")
+    WebElement modalMessage;
 
 
     public void typePracticeForm(Student student) {
@@ -51,8 +55,21 @@ public class PracticeFormPage extends BasePage {
         typeDateOfBirth(student.getDateOfBirth());
         typeSubjects(student.getSubjects());
         typeHobbies(student.getHobbies());
-
         fieldAddress.sendKeys(student.getAddress());
+        typeStateCity(student.getState(),student.getCity());
+        btnSubmit.click();
+    }
+
+    public boolean validateModalMessage(){
+        return validateTextElement(modalMessage,"Thanks for submitting the form");
+    }
+
+    private void typeStateCity(String state, String city) {
+        inputState.sendKeys(state);
+        inputState.sendKeys(Keys.ENTER);
+
+        inputCity.sendKeys(city);
+        inputCity.sendKeys(Keys.ENTER);
 
     }
 
